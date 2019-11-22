@@ -1,0 +1,16 @@
+Week 1
+•	Web page
+•	Working cloud
+Week 2
+•	Converting application working (mencoder)
+•	Web page conneted
+Week 3
+•	Queue manager
+•	Loadbalancer
+•	Ansible
+•	Workload generator
+Week 4
+•	Grafana
+•	Scalabity, Robustness
+Week 5
+•	
