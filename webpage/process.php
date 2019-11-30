@@ -11,8 +11,8 @@
 			'region'  => 'eu-north-1',
 			'version' => 'latest',
 			'credentials' => [
-				'key'    => "AKIATZUDUIJ6GAXJM6MI",
-				'secret' => "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",
+				'key'    => "_id_",
+				'secret' => "_secret_",
 			]
 		]);		
 		$result = $s3->putObject([
