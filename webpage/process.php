@@ -1,19 +1,20 @@
 <?php
 $unique = $_SERVER["UNIQUE_ID"];
 if(isset($_POST["submit"])) {
-	if(isset($_FILES['fileToUpload'])){
+	if(isset($_FILES['fileToUpload'])){   
     $newExt = $_POST["outputExt"];
-        
 		$file_name = $_FILES['fileToUpload']['name'];
-        $ext = pathinfo($file_name, PATHINFO_EXTENSION);   
+        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+        if($ext == "avi" || $ext == "mp4" || $ext == "mpg")
+        {  
 		$temp_file_location = $_FILES['fileToUpload']['tmp_name']; 
 		require 'vendor/autoload.php';
 		$s3 = new Aws\S3\S3Client([
 			'region'  => 'eu-north-1',
 			'version' => 'latest',
 			'credentials' => [
-				'key'    => "-",
-				'secret' => "-",
+				'key'    => "AKIATZUDUIJ6MWJJEROO",
+				'secret' => "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",
 			]
 		]);		
 		$result = $s3->putObject([
@@ -21,6 +22,10 @@ if(isset($_POST["submit"])) {
 			'Key'    => "unconverted/$unique.$ext",
 			'SourceFile' => $temp_file_location			
 		]);
+        
+        $command = escapeshellcmd("/home/ubuntu/rabbitMQ/env/bin/python3 /home/ubuntu/rabbitMQ/sender.py $unique.$ext $newExt");
+        $output = shell_exec($command);
+        echo $output;
         
         sleep(10);
         $i=0;
@@ -65,5 +70,11 @@ if(isset($_POST["submit"])) {
         $i = $i+1;
         endwhile;   
 	}
+    else
+    {
+        echo "wrong file type";
+    }
+    
+    }
 }
 ?>
