@@ -1,3 +1,0 @@
-- Make a pretty page
-- Know the input and ouput formats allowed
-
